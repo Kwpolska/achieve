@@ -21,22 +21,22 @@ Requirements: Python 3, PostgreSQL or SQLite3, nginx, uWSGI, Unix (Linux)
    If you want to use PostgreSQL, `pip install psycopg2`.
    You will need the following environment variables:
 
-       DJANGO_SETTINGS_MODULE=achieveapp.settings
-       DEBUG=0
-       DB_TYPE=postgres   # or sqlite3
-       SECRET_KEY=  # set to something random
-       DB_PASSWORD=  # set to whatever your database password is (PostgreSQL)
-       DJANGO_LOG_PATH=/srv/achieve/logs/django.log
-       DJANGO_STATIC_ROOT=/srv/achieve/static
+        DJANGO_SETTINGS_MODULE=achieveapp.settings
+        DEBUG=0
+        DB_TYPE=postgres   # or sqlite3
+        SECRET_KEY=  # set to something random
+        DB_PASSWORD=  # set to whatever your database password is (PostgreSQL)
+        DJANGO_LOG_PATH=/srv/achieve/logs/django.log
+        DJANGO_STATIC_ROOT=/srv/achieve/static
 
 3. Create a `local-config` file that `export`s those variables (use something
    different for `DJANGO_LOG_PATH` and set `DEBUG=1`) to use `./manage.py`
 4. Run the following commands:
 
-    source local-config
-    ./manage.py migrate
-    ./manage.py collectstatic
-    ./manage.py createsuperuser
+        source local-config
+        ./manage.py migrate
+        ./manage.py collectstatic
+        ./manage.py createsuperuser
 5. Edit `templates/achieve/pub_index.html` and add some way to contact you for
    prospective new users (if you want those).
 6. (Re)start nginx and uWSGI.
