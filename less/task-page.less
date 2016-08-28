@@ -1,0 +1,93 @@
+/* Task Page styling */
+.task-status-btn-form {
+    display: inline;
+}
+
+.task-status-btn {
+    background: none;
+    border: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    cursor: hand;
+    line-height: 1;
+    transition: color 0.25s ease, background 0.25s ease, all 0.25s ease;
+    color: @brand-success;
+    border-style: solid;
+    border-color: @brand-success;
+    float: left;
+}
+
+.tsb-big {
+    width: 36px;
+    height: 36px;
+    font-size: 26px;
+    border-width: 5px;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.tsb-small {
+    width: 21px;
+    height: 21px;
+    border-width: 3px;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+.task-status-btn:hover, .task-status-btn:focus {
+    color: darken(@brand-success, 10%);
+    border-color: darken(@brand-success, 10%);
+    background: lighten(@brand-success, 50%);
+    outline: none;
+}
+
+.task-status-btn:active {
+    color: darken(@brand-success, 15%);
+    border-color: darken(@brand-success, 15%);
+    background: lighten(@brand-success, 45%);
+    outline: none;
+}
+
+/* Task editor */
+.task-title-editbox, .project-title-editbox {
+    height: 36px;
+    display: inline;
+    font-size: 30px;
+    line-height: 1.2em;
+    vertical-align: middle;
+}
+
+.project-title-editbox {
+    width: 100% !important;
+}
+
+.task-title-editbox {
+    width: ~"calc(100% - 46px)";
+}
+
+
+.task-reminder-seen {
+    text-decoration: line-through;
+}
+
+@media (max-width: @screen-sm-max) {
+    .datetime select.form-control {
+        display: inline;
+        width: 20%;
+    }
+    .datetime input.form-control {
+        display: inline;
+        width: 20%;
+    }
+}
+
+input.done-checkbox {
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline;
+}

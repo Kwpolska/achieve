@@ -1,0 +1,46 @@
+<form action="" method="GET" class="filter-line form-inline">
+    {{ form.non_field_errors }}
+    <div class="form-group">
+        {{ form.done.errors }}
+        <label for="{{ form.done.id_for_label }}">Done:</label>
+        {{ form.done }}
+    </div>
+
+    <div class="form-group">
+        {{ form.priority.errors }}
+        <label for="{{ form.priority.id_for_label }}">Priority:</label>
+        {{ form.priority }}
+    </div>
+
+    <div class="form-group">
+        {{ form.overdue.errors }}
+        <label for="{{ form.overdue.id_for_label }}">{{ form.overdue }} Overdue</label>
+    </div>
+
+    <div class="form-group">
+        {{ form.has_reminder.errors }}
+        <label for="{{ form.has_reminder.id_for_label }}">{{ form.has_reminder }} Has reminder</label>
+    </div>
+
+    <div class="form-group">
+        {{ form.pinned.errors }}
+        <label for="{{ form.pinned.id_for_label }}">{{ form.pinned }} Pinned</label>
+    </div>
+
+    {% if show_no_project %}
+    <div class="form-group">
+        {{ form.no_project.errors }}
+        <label for="{{ form.no_project.id_for_label }}">{{ form.no_project }} No project</label>
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+        {{ form.search.errors }}
+        {{ form.search }}
+    </div>
+
+    <div class="form-group">
+    <input type="hidden" name="page" value="{{ table.number }}">
+    <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</button>
+    </div>
+</form>

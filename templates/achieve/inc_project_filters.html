@@ -1,0 +1,35 @@
+<form action="" method="GET" class="filter-line form-inline">
+    {{ form.non_field_errors }}
+    <div class="form-group">
+        {{ form.open.errors }}
+        <label for="{{ form.open.id_for_label }}">Open:</label>
+        {{ form.open }}
+    </div>
+
+    <div class="form-group">
+        {{ form.progress.errors }}
+        <label for="{{ form.progress.id_for_label }}">Progress:</label>
+        {{ form.progress }}
+    </div>
+
+    <div class="form-group">
+        {{ form.priority.errors }}
+        <label for="{{ form.priority.id_for_label }}">Priority:</label>
+        {{ form.priority }}
+    </div>
+
+    <div class="form-group">
+        {{ form.pinned.errors }}
+        <label for="{{ form.pinned.id_for_label }}">{{ form.pinned }} Pinned</label>
+    </div>
+
+    <div class="form-group">
+        {{ form.search.errors }}
+        {{ form.search }}
+    </div>
+
+    <div class="form-group">
+    <input type="hidden" name="page" value="{{ table.number }}">
+    <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</button>
+    </div>
+</form>

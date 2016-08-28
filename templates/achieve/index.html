@@ -1,0 +1,36 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}Overview{% endblock title %}</h1>
+<h2>Quick add</h2>
+<form action="{% url "achieve:quick_add" %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'achieve:index' %}">
+    <div class="input-group">
+        <input type="text" name="title" class="form-control" placeholder="New task">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Add Task</button>
+        </span>
+    </div>
+</form>
+<div class="clearfix">
+    <h2><a href="{% url 'achieve:due_soon' %}">Due Soon{% badge 'due_soon' %}</a></h2>
+    {% task_table due_soon "Hooray, you have no tasks due soon!" False %}
+    {% if due_soon_has_more %}
+    <a class="btn btn-default pull-right" href="{% url 'achieve:due_soon' %}">more…</a>
+    {% endif %}
+</div>
+
+<div class="clearfix">
+    <h2><a href="{% url 'achieve:tasks' %}?f-pinned=on">Pinned Tasks{%badge_count pinned_index %}</a></h2>
+    {% task_table pinned_index "You have no pinned tasks." False %}
+</div>
+
+<div class="clearfix">
+    <h2><a href="{% url 'achieve:inbox' %}">Inbox{% badge 'inbox' %}</a></h2>
+    {% task_table inbox "Hooray, the inbox is empty!" False %}
+    {% if inbox_has_more %}
+    <a class="btn btn-default pull-right" href="{% url 'achieve:inbox' %}">more…</a>
+    {% endif %}
+</div>
+{% endblock content %}

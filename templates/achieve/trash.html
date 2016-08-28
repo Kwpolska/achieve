@@ -1,0 +1,14 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}Trash{% endblock title %} {% badge 'trash' %}</h1>
+{% if table %}
+<form class="toolbar" method="POST" action="{% url 'achieve:trash_empty' %}">
+    {% csrf_token %}
+    <div class="action-line">
+        <button type="submit" name="empty" class="btn btn-danger"><i class="fa fa-trash-o"></i> Empty Trash</button>
+    </div>
+</form>
+{% endif %}
+{% task_table table empty_msg %}
+{% endblock content %}

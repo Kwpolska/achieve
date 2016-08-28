@@ -1,0 +1,13 @@
+bleach==1.4.3
+coverage==4.2
+Django==1.10
+django-bootstrap3==7.0.1
+html5lib==0.9999999
+Markdown==2.6.6
+mdx-linkify==0.6
+py==1.4.31
+pytest==3.0.1
+pytest-cov==2.3.1
+pytest-django==3.0.0
+pytz==2016.6.1
+six==1.10.0

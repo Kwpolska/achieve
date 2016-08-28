@@ -1,0 +1,19 @@
+/* Poor Man’s Snackbar */
+.alert-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 70%;
+}
+
+.alert-bottom .alert {
+    margin-bottom: 5px;
+    border-color: @btn-success-border;
+}
+
+.alert-bottom .alert:last-child {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+

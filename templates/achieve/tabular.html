@@ -1,0 +1,18 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}{{ title }}{% endblock title %}{% if badge_name %}{% badge badge_name %}{% endif %}</h1>
+<div class="toolbar">
+    <div class="action-line">
+        {% if show_add_button and new_location %}
+        <a href="{% url "achieve:add" %}?loc={{ new_location }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add Task Here</a>
+        {% elif show_add_button %}
+        <a href="{% url "achieve:add" %}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add Task</a>
+        {% endif %}
+        <button type="button" class="btn filter-show-btn"><i class="fa fa-filter"></i> Show/hide filters</button>
+    </div>
+    {% task_filters table filter_form %}
+</div>
+{% task_table table empty_msg %}
+{% pagination table %}
+{% endblock content %}

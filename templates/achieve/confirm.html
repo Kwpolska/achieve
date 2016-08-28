@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}{{ title }}{% endblock %}</h1>
+<p class="lead">{{ question }}</p>
+<form method="POST" action="">
+    {% if delete_tasks_q %}
+    <p>This {{ itemname }} contains tasks.<br>
+    <label><input type="radio" name="delete_tasks" value="no" checked> Leave the tasks as-is</label><br>
+    <label><input type="radio" name="delete_tasks" value="trash"> Move tasks in this {{ itemname }} to the Trash</label><br>
+    <label><input type="radio" name="delete_tasks" value="delete"> Delete the tasks in this {{ itemname }} permanently</label><br>
+    {% endif %}
+    {% if action %}
+    <input type="hidden" name="action" value="{{ action }}">
+    {% endif %}
+    {% csrf_token %}
+    <p class="lead">
+    <button class="btn btn-{{ type_yes }}" name="really" value="1"><i class="fa fa-check"></i> Yes</button>
+    <button class="btn btn-{{ type_no }}" name="really" value="0"><i class="fa fa-times"></i> No</button>
+    </p>
+</form>
+{% endblock %}

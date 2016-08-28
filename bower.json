@@ -1,0 +1,22 @@
+{
+  "name": "achieve",
+  "authors": [
+    "Chris Warrick <achieve@chriswarrick.com>"
+  ],
+  "description": "Achieve",
+  "main": "",
+  "moduleType": [],
+  "license": "BSD",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

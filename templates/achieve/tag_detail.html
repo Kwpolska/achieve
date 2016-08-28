@@ -1,0 +1,31 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}{{ tag.title }}{% endblock title %}</h1>
+<div class="toolbar">
+    <form action="" method="POST" class="action-line form-inline">
+        {% csrf_token %}
+        <button tabindex="1" type="submit" name="action" value="{% if tag.pinned %}un{% endif %}pin" class="btn btn-default {% if tag.pinned %}active{% endif %}"><i class="fa fa-thumb-tack"></i> Pin</button>
+        <div class="input-group">
+            {{ form.title.errors }}{{ form.title }}
+            <span class="input-group-btn"><button tabindex="2" name="action" value="save" type="submit" class="btn btn-info"><i class="fa fa-pencil"></i> Rename</button></span>
+        </div>
+    </form>
+</div>
+
+<div class="clearfix">
+    <h2><a href="{% url 'achieve:projects_with_tag' tag.slug %}">Projects</a></h2>
+    {% project_table projects empty_projects_msg False %}
+    {% if projects_has_more %}
+    <a class="btn btn-default pull-right" href="{% url 'achieve:projects_with_tag' tag.slug %}">more…</a>
+    {% endif %}
+</div>
+
+<div class="clearfix">
+    <h2><a href="{% url 'achieve:tasks_with_tag' tag.slug %}">Tasks</a></h2>
+    {% task_table tasks empty_tasks_msg False %}
+    {% if tasks_has_more %}
+    <a class="btn btn-default pull-right" href="{% url 'achieve:tasks_with_tag' tag.slug %}">more…</a>
+    {% endif %}
+</div>
+{% endblock content %}

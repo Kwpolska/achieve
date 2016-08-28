@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" action="{% url 'login' %}" class="form-signin">
+    {% csrf_token %}
+    <h2 class="form-signin-heading">{% block title %}Please sign in{% endblock title %}</h2>
+{% if form.errors %}
+<p class="text-danger">Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+{% if user.is_authenticated %}
+<p class="text-danger">Your account doesn't have access to this page. To proceed,
+please sign in with an account that has access.</p>
+{% else %}
+<p class="text-danger">Please sign in to see this page.</p>
+{% endif %}
+{% endif %}
+    <label for="username" class="sr-only">Username</label>
+    <input id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <input type="hidden" name="next" value="{{ next }}">
+<p><a class="btn btn-block" href="{% url 'password_reset' %}">Lost password?</a></p>
+</form>
+
+{% endblock %}

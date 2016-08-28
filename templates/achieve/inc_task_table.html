@@ -1,0 +1,50 @@
+{% load achieve_extras %}
+{% if table %}
+<table class="table task-table table-hover">
+    <thead>
+        {% if sortable %}
+        <th class="task-table-done">{% sortable_head "s_done" '<i class="fa fa-check"></i>' %}</th>
+        <th class="task-table-title">{% sortable_head "s_title" "Title" %}</th>
+        <th class="task-table-project">{% sortable_head "s_project" "Project" %}</th>
+        <th class="task-table-priority">{% sortable_head "s_priority" "Priority" %}</th>
+        <th class="task-table-added">{% sortable_head "s_added" "Added" %}</th>
+        <th class="task-table-due">{% sortable_head "s_due" "Due" %}</th>
+        {% else %}
+        <th class="task-table-done"><i class="fa fa-check"></i></th>
+        <th class="task-table-title">Title</th>
+        <th class="task-table-project">Project</th>
+        <th class="task-table-priority">Priority</th>
+        <th class="task-table-added">Added</th>
+        <th class="task-table-due">Due</th>
+        {% endif %}
+    </thead>
+    <tbody>
+        {% for i in table %}
+        <tr{% if i.overdue %} class="danger"{% elif i.done %} class="success"{% endif %}>
+            <td class="task-table-done">
+
+        <form action="{{ i.get_absolute_url }}" method="POST" class="task-status-btn-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        {% if i.done %}
+        <button tabindex="1" type="submit" name="action" value="undo" class="task-status-btn tsb-small task-undo-btn">
+            <i class="fa fa-check"></i><span class="sr sr-only">Mark as not done</span>
+        </button>
+        {% else %}
+        <button tabindex="1" type="submit" name="action" value="done" class="task-status-btn tsb-small task-done-btn">
+            <span class="sr sr-only">Mark as done</span>
+        </button>
+        {% endif %}
+    </form>
+            <td class="task-table-title"><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></td>
+            <td class="task-table-project">{{ i.project.link }}</td>
+            <td class="task-table-priority">{{ i.priority }}</td>
+            <td class="task-table-added">{{ i.added|date:"Y-m-d H:i:s" }}</td>
+            <td class="task-table-due">{{ i.due|date:"Y-m-d H:i:s" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-muted">{{ empty_msg }}</p>
+{% endif %}

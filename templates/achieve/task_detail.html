@@ -1,0 +1,70 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">
+    <form action="" method="POST" class="task-status-btn-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        {% if task.done %}
+        <button tabindex="1" type="submit" name="action" value="undo" class="task-status-btn tsb-big task-undo-btn">
+            <i class="fa fa-check"></i><span class="sr sr-only">Mark as not done</span>
+        </button>
+        {% else %}
+        <button tabindex="1" type="submit" name="action" value="done" class="task-status-btn tsb-big task-done-btn">
+            <span class="sr sr-only">Mark as done</span>
+        </button>
+        {% endif %}
+    </form>
+    <div class="task-title{% if task.folder == 'trash' %} task-trash{% endif %}">
+        {% block title %}{{ task.title }}{% endblock title %}
+    </div>
+</h1>
+<div class="toolbar">
+    <form action="" class="action-line" method="POST">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        {% csrf_token %}
+        <button tabindex="2" name="action" value="edit" type="submit" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</button>
+        {% if task.folder == 'trash' %}
+            <button tabindex="4" name="action" value="undelete" type="submit" class="btn btn-default"><i class="fa fa-undo"></i> Restore</button>
+            <button tabindex="5" name="action" value="perm_delete" type="submit" class="btn btn-danger"><i class="fa fa-times"></i> Permanently delete</button>
+        {% else %}
+            <button tabindex="3" type="submit" name="action" value="{% if task.pinned %}un{% endif %}pin" class="btn btn-default {% if task.pinned %}active{% endif %}"><i class="fa fa-thumb-tack"></i> Pin</button>
+            {% if task.folder == 'inbox' %}
+                <button tabindex="4" name="action" value="move_tasks" type="submit" class="btn btn-default"><i class="fa fa-tasks"></i> Move to Tasks</button>
+            {% else %}
+                <button tabindex="4" name="action" value="move_inbox" type="submit" class="btn btn-default"><i class="fa fa-inbox"></i> Move to Inbox</button>
+            {% endif %}
+            <button tabindex="5" name="action" value="delete" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+        {% endif %}
+    </form>
+</div>
+<div class="task-line">
+    <dl class="dl dl-horizontal dl-leftalign">
+        <dt>Folder:</dt><dd>{% folder_link task.folder %}</dd>
+        <dt>Added:</dt><dd>{{ task.added |date:"Y-m-d H:i:s" }}</dd>
+        <dt>Modified:</dt><dd>{{ task.modified |date:"Y-m-d H:i:s" }}</dd>
+        <dt>Due:</dt><dd{% if task.overdue %} class="overdue"{% endif %}>{{ task.due |date:"Y-m-d H:i:s" }}</dd>
+        <dt>Reminder:</dt><dd {% if task.reminder_seen %}class="task-reminder-seen"{% endif %}>{{ task.reminder |date:"Y-m-d H:i:s" }}</dd>
+        <dt>Tags:</dt>
+        <dd>
+        {% for tag in task.tags.all %}
+        {{ tag.link_label }}
+        {% empty %}
+        none
+        {% endfor %}
+        </dd>
+        <dt>Project:</dt>
+        <dd>
+        {% if task.project %}
+        {{ task.project.link }} {{ task.project.progressbar }}
+        {% else %}
+        none
+        {% endif %}
+        </dd>
+    </dl>
+</div>
+{{ task.description_md }}
+{% if task.resolution %}
+<strong>Resolution:</strong> {{ task.resolution_md }}
+{% endif %}
+{% endblock content %}

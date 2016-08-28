@@ -1,0 +1,14 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}Collection Mode{% endblock %}</h1>
+<p class="lead">Type tasks, one on each line, that will be added to your {% folder_link 'inbox' %}.</p>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="collection-box" class="sr-only">Tasks to add</label>
+        <textarea id="collection-box" name="collection-box" class="form-control" placeholder="Type in tasks here…"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Add to Inbox</button>
+</form>
+{% endblock %}

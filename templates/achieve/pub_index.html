@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}Achieve{% endblock title %}</h1>
+<p class="lead">This is a task management/productivity app that loosely follows GTD principles.</p>
+<p>Existing users should <a href="{% url 'login' %}">log in</a>. New users are not accepted at this time.</p>
+{% endblock content %}

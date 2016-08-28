@@ -1,0 +1,18 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}Collection Mode{% endblock %}</h1>
+<p class="lead text-success">
+{% if tasks|length == 1 %}
+1 task was added.
+{% else %}
+{{ tasks|length }} tasks were added.
+{% endif %}
+<a href="{% url 'achieve:collection' %}">Add more</a>
+</p>
+<ul>
+{% for t in tasks %}
+<li><a href="{{ t.get_absolute_url }}">{{ t.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

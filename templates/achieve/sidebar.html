@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load achieve_extras %}
+{% block pre_content %}
+<div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            {% navbar_entry 'achieve:index' 'Overview' 'fa-dashboard' %}
+            {% navbar_badge 'achieve:inbox' 'Inbox' 'inbox' 'fa-inbox' %}
+            {% navbar_badge 'achieve:tasks' 'Tasks' 'all_tasks' 'fa-tasks' %}
+            {% navbar_badge 'achieve:projects' 'Projects' 'projects' 'fa-book' %}
+            {% navbar_entry 'achieve:tags' 'Tags' 'fa-tag' %}
+            {% navbar_badge 'achieve:due_soon' 'Due Soon' 'due_soon' 'fa-clock-o' %}
+            {% navbar_badge 'achieve:trash' 'Trash' 'trash' 'fa-trash' %}
+        </ul>
+
+        {% if pinned_items %}
+        <ul class="nav nav-sidebar">
+            {% for i in pinned_items %}
+                {% navbar_pin i %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+{% endblock pre_content %}
+{% block post_content %}</div>{% endblock post_content %}

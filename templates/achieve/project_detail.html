@@ -1,0 +1,47 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}{{ project.title }}{% endblock title %}</h1>
+<div class="toolbar">
+    <form action="" class="action-line" method="POST">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        {% csrf_token %}
+        <a href="{% url "achieve:add" %}?loc={{ new_location }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add Task Here</a>
+        <button tabindex="2" name="action" value="edit" type="submit" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</button>
+        {% if project.open %}
+        <button tabindex="3" type="submit" name="action" value="{% if project.pinned %}un{% endif %}pin" class="btn btn-default {% if project.pinned %}active{% endif %}"><i class="fa fa-thumb-tack"></i> Pin</button>
+        <button tabindex="4" name="action" value="close" type="submit" class="btn btn-default"><i class="fa fa-archive"></i> Close</button>
+        {% else %}
+        <button tabindex="4" name="action" value="open" type="submit" class="btn btn-default"><i class="fa fa-archive"></i> Open</button>
+        {% endif %}
+        {% if project.trash %}
+        <button tabindex="5" name="action" value="undelete" type="submit" class="btn btn-default"><i class="fa fa-undo"></i> Restore</button>
+        <button tabindex="6" name="action" value="perm_delete" type="submit" class="btn btn-danger"><i class="fa fa-times"></i> Permanently delete</button>
+        {% else %}
+        <button tabindex="6" name="action" value="delete" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+        {% endif %}
+        <button type="button" class="btn filter-show-btn"><i class="fa fa-filter"></i> Toggle filters</button>
+    </form>
+    {% task_filters table filter_form False %}
+</div>
+{{ project.progressbar }}
+<div class="task-line">
+    <dl class="dl dl-horizontal dl-leftalign">
+        <dt>Added:</dt><dd>{{ project.added |date:"Y-m-d H:i:s" }}</dd>
+        <dt>Modified:</dt><dd>{{ project.modified |date:"Y-m-d H:i:s" }}</dd>
+        <dt>Priority:</dt><dd>{{ project.priority }}</dd>
+        <dt>Tags:</dt>
+        <dd>
+        {% for tag in project.tags.all %}
+        {{ tag.link_label }}
+        {% empty %}
+        none
+        {% endfor %}
+        </dd>
+    </dl>
+</div>
+{{ project.description_md }}
+
+{% task_table table empty_msg %}
+{% pagination table %}
+{% endblock content %}

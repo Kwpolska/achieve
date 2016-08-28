@@ -1,0 +1,25 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block content %}
+<h1 class="pagetitle">{% block title %}{{ title }}{% endblock title %}</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.title.errors }}
+    <input type="hidden" name="action" value="add">
+    <div class="input-group">
+        <input type="text" name="title" class="form-control" placeholder="New tag">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Add Tag</button>
+        </span>
+    </div>
+</form>
+{% for letter, tags in tags_per_letter.items %}
+    <h2>{{ letter }}</h2>
+    {% for tag in tags %}
+        {{ tag.link_label }}
+    {% endfor %}
+{% empty %}
+<p class="text-muted">No tags.</p>
+{% endfor %}
+{% endblock content %}

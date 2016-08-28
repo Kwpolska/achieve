@@ -1,0 +1,24 @@
+{% extends "achieve/sidebar.html" %}
+{% load achieve_extras %}
+{% block title %}{% if project %}Edit {{ project.title }}{% else %}Add new project{% endif %}{% endblock title %}
+{% block content %}
+<h1 class="pagetitle">{% if project %}Edit project{% else %}Add new project{% endif %}</h1>
+<form action="" method="POST" class="project-edit-form form-horizontal">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-group">{{ form.title.errors }}<label for="{{ form.title.id_for_label }}" class="col-sm-2 control-label">{{ form.title.label }}</label><div class="col-sm-10 form-inline">{{ form.title }}</div></div>
+    <div class="form-group">{{ form.priority.errors }}<label for="{{ form.priority.id_for_label }}" class="col-sm-2 control-label">{{ form.priority.label }}</label><div class="col-sm-10 form-inline">{{ form.priority }}</div></div>
+    <div class="form-group">{{ form.tags.errors }}<label for="{{ form.tags.id_for_label }}" class="col-sm-2 control-label">{{ form.tags.label }}</label><div class="col-sm-10 form-inline">{{ form.tags }}</div></div>
+    <div class="form-group">{{ form.description.errors }}<label for="{{ form.description.id_for_label }}" class="col-sm-2 control-label">{{ form.description.label }}</label><div class="col-sm-10 form-inline">{{ form.description }}</div></div>
+    <div class="form-group">{{ form.open.errors }}<div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label for="{{ form.open.id_for_label }}">{{ form.open }} {{ form.open.label }}</label></div></div></div>
+    <div class="form-group">{{ form.pinned.errors }}<div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label for="{{ form.pinned.id_for_label }}">{{ form.pinned }} {{ form.pinned.label }}</label></div></div></div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button name="action" value="save" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+            {% if mode == "edit" %}
+            <button name="action" value="show" type="submit" class="btn btn-default"><i class="fa fa-times"></i> Cancel editing</button>
+            {% endif %}
+        </div>
+    </div>
+</form>
+{% endblock content %}

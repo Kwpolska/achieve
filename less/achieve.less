@@ -1,0 +1,82 @@
+@import "bs-achieve-variables.less";
+@import "navigation-main.less";
+@import "tables.less";
+@import "task-page.less";
+@import "signin.less";
+@import "snackbar.less";
+
+/* Toolbar */
+.toolbar {
+    margin-bottom: 10px;
+    border-top: 1px solid @well-border;
+    border-bottom: 2px solid @well-border;
+    border-radius: @border-radius-base;
+}
+
+.toolbar .action-line, .toolbar .filter-line {
+    padding: 5px;
+}
+
+.toolbar .filter-line {
+    border-top: 1px solid @well-border;
+    border-radius: @border-radius-base;
+}
+
+/* Filters */
+
+.filter-line {
+    transition: display ease 1s;
+}
+
+.filter-show-btn {
+    display: none;
+}
+
+@media (max-width: @screen-xs-max) {
+    .filter-line {
+        display: none;
+    }
+
+    .filter-show-btn {
+        display: inline;
+    }
+}
+
+/* Collection Mode */
+#collection-box {
+    font-size: 1.5em;
+    height: 15em;
+}
+
+/* Badges */
+.badge,
+.navbar-achieve .active .badge,
+.navbar-achieve li a:hover > .badge,
+.nav-sidebar > li.active > a:hover > .badge {
+    background-color: @brand-primary;
+}
+
+/* Form alignment */
+.form-horizontal .control-label {
+    text-align: left !important;
+}
+
+/* Prettier definition lists */
+.dl-leftalign dt {
+    text-align: left;
+}
+
+/* Special casing for inline tag editor */
+#tageditor {
+    display: none;
+}
+
+.form-inline-fixpadding .form-group label,
+.form-inline-fixpadding .form-group input {
+    margin-right: 5px;
+}
+
+/* Pagination */
+.pagination-container {
+    text-align: center;
+}

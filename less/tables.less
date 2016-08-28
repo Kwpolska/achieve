@@ -1,0 +1,97 @@
+/* Styles for task and project tables */
+
+.task-table-done, .task-table-title a {
+    line-height: 21px;
+}
+
+.task-table-done {
+    width: 50px;
+}
+
+.task-table-project {
+    width: 20%;
+}
+
+.task-table-priority {
+    width: 10%;
+}
+
+.task-table-added {
+    width: 15%;
+}
+
+.task-table-due {
+    width: 15%;
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+
+    .task-table-project {
+        width: 16%;
+    }
+
+    .task-table-priority {
+        width: 11%;
+    }
+
+    .task-table-added {
+        width: 12.5%;
+    }
+
+    .task-table-due {
+        width: 12.5%;
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+    .task-table-project, .task-table-priority, .task-table-added, .task-table-due,
+    .project-table-priority, .project-table-open {
+        display: none !important;
+    }
+}
+
+.task-title {
+    line-height: 1em;
+}
+
+.task-title.task-trash {
+    text-decoration: line-through;
+}
+
+.project-table-title {
+    width: 43%;
+}
+
+.project-table-priority {
+    width: 6%;
+}
+
+.project-table-open {
+    width: 8%;
+}
+
+.project-table-progress {
+    width: 43%;
+}
+
+td.project-table-title > a {
+    font-size: 1.2em;
+}
+
+.project-table-title > p:last-child {
+    margin-bottom: 0;
+}
+
+.project-table-progress > .progress {
+    margin-bottom: 0;
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th {
+    vertical-align: middle;
+}
+
+a.sortbtn {
+    color: black;
+    text-decoration: none;
+}
