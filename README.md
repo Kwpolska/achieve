@@ -1,6 +1,8 @@
 Achieve
 =======
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff068d9259f949d8b68c4b74bfb1a4de)](https://www.codacy.com/app/kwpolska/achieve?utm_source=github.com&utm_medium=referral&utm_content=Kwpolska/achieve&utm_campaign=badger)
+
 A task management/productivity web app, written in Django (Python). It loosely
 follows GTD principles.
 
